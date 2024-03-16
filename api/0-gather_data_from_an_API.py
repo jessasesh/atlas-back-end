@@ -9,8 +9,8 @@ import sys
 
 
 def emp_todo(employeeId):
-    """ 
-    Returns all tasks associated with an employee. 
+    """
+    Returns all tasks associated with an employee.
     """
     url = "https://jsonplaceholder.typicode.com/"
     url += "users/{}/todos".format(employeeId)
@@ -19,8 +19,8 @@ def emp_todo(employeeId):
 
 
 def emp_name(employeeId):
-    """ 
-    Returns employee name. 
+    """
+    Returns employee name.
     """
     url = "https://jsonplaceholder.typicode.com/"
     url += "users/{}".format(employeeId)
@@ -29,7 +29,7 @@ def emp_name(employeeId):
 
 
 def comp_tasks(tasks):
-    """ 
+    """
     Returns number of completed tasks by specified employee.
     """
     completed_tasks = []
@@ -41,8 +41,8 @@ def comp_tasks(tasks):
 
 
 def print_emp_tasks(employeeName, completedTasks, totalTasks):
-    """ 
-    Prints all tasks belonging to specified employee. 
+    """
+    Prints all tasks belonging to specified employee.
     """
     print("Employee {} is done with tasks({}/{}):"
           .format(employeeName, len(completedTasks), totalTasks))
