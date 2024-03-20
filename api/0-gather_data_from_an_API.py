@@ -45,7 +45,6 @@ def print_employee_tasks(employeeName, completedTasks, totalTasks):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python3 script.py <employee_id>")
         sys.exit(1)
 
     employeeId = sys.argv[1]
