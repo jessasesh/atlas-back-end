@@ -9,8 +9,6 @@ from sys import argv
 
 if __name__ == "__main__":
     if len(argv) != 2:
-        print("Usage: python3 3-dictionary_of_list_of_dictionaries.py "
-              "<employeeId>")
         exit()
 
     employeeId = argv[1]
