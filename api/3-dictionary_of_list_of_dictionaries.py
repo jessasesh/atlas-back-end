@@ -5,43 +5,37 @@ from the JSONPlaceholder API and exports the data in JSON format.
 """
 import json
 import requests
-import sys
+from sys import argv
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: ./3-dictionary_of_list_of_dictionaries.py <employeeId>")
-        sys.exit(1)
+    if len(argv) != 2:
+        print("Usage: python3 3-dictionary_of_list_of_dictionaries.py "
+              "<employeeId>")
+        exit()
 
-    employeeId = sys.argv[1]
-    url_user = 'https://jsonplaceholder.typicode.com/users/{}'.format(employeeId)
-    url_todos = 'https://jsonplaceholder.typicode.com/todos?userId={}'.format(employeeId)
+    employeeId = argv[1]
+    base_url = "https://jsonplaceholder.typicode.com"
+    user_url = f"{base_url}/users/{employeeId}"
+    todos_url = f"{base_url}/todos?userId={employeeId}"
 
-    response_user = requests.get(url_user)
-    response_todos = requests.get(url_todos)
+    user_response = requests.get(user_url)
+    todos_response = requests.get(todos_url)
 
-    if response_user.status_code != 200:
-        print("User not found")
-        sys.exit(1)
-    if response_todos.status_code != 200:
-        print("Todos not found")
-        sys.exit(1)
+    user_data = user_response.json()
+    todos_data = todos_response.json()
 
-    user_data = response_user.json()
-    todos_data = response_todos.json()
+    username = user_data.get("username")
 
-    username = user_data.get('username')
-
-    tasks = []
-    for todo in todos_data:
-        task = {
+    todo_list = []
+    for task in todos_data:
+        todo_list.append({
             "username": username,
-            "task": todo.get('title'),
-            "completed": todo.get('completed')
-        }
-        tasks.append(task)
+            "task": task.get("title"),
+            "completed": task.get("completed")
+        })
 
-    output = {employeeId: tasks}
+    output_data = {employeeId: todo_list}
 
-    with open('todo_all_employees.json', 'a') as file:
-        json.dump(output, file)
-    
+    with open("todo_all_employees.json", "a") as json_file:
+        json.dump(output_data, json_file)
+        json_file.write("\n")
