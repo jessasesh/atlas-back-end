@@ -25,7 +25,15 @@ def get_employee_tasks(employeeId):
     return response.json()
 
 
-def get_completed_tasks(tasks):
+def get_completed_tasks(employeeName, completedTasks, totalTasks):
+    """ Prints all tasks by employee ID """
+    print("Employee {} is done with tasks({}/{}):".format
+          (employeeName, len(completedTasks), totalTasks))
+    for task in completedTasks:
+        print("  {}".format(task.get("title")))
+
+
+def print_employee_tasks(tasks):
     """ Returns all completed tasks """
     completed_tasks = []
 
@@ -35,14 +43,6 @@ def get_completed_tasks(tasks):
     return completed_tasks
 
 
-def print_employee_tasks(employeeName, completedTasks, totalTasks):
-    """ Prints all tasks by employee ID """
-    print("Employee {} is done with tasks({}/{}):".format
-          (employeeName, len(completedTasks), totalTasks))
-    for task in completedTasks:
-        print("  {}".format(task.get("title")))
-
-
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         sys.exit(1)
@@ -50,5 +50,5 @@ if __name__ == "__main__":
     employeeId = sys.argv[1]
     tasks = get_employee_tasks(employeeId)
     employeeName = get_employee_name(employeeId)
-    completedTasks = get_completed_tasks(tasks)
-    print_employee_tasks(employeeName, completedTasks, len(tasks))
+    completedTasks = print_employee_tasks(tasks)
+    get_completed_tasks(employeeName, completedTasks, len(tasks))
