@@ -37,12 +37,14 @@ def export_to_csv(employee_id, todo_list):
         writer = csv.writer(file, quoting=csv.QUOTE_ALL)
 
         # Write the header row
-        writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+        writer.writerow(["USER_ID", "USERNAME",
+                         "TASK_COMPLETED_STATUS", "TASK_TITLE"])
 
         # Write each task to the CSV file
         for task in todo_list:
             username = get_username(task['userId'])
-            writer.writerow([task['userId'], username, task['completed'], task['title']])
+            writer.writerow([task['userId'], username,
+                             task['completed'], task['title']])
 
 
 if __name__ == "__main__":
