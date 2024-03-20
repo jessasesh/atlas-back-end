@@ -14,7 +14,7 @@ def get_employee_name(employee_id):
     url += "users/{}".format(employee_id)
     response = requests.get(url)
     employee_data = response.json()
-    return employee_data.get("name", "Unknown")
+    return employee_data.get("name")
 
 
 def get_employee_tasks(employeeId):
