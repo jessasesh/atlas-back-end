@@ -4,8 +4,8 @@ Python script that, for a given employee ID, returns
 information about his/her TODO list progress.
 """
 
-import sys
 import requests
+import sys
 
 
 def get_todo_list(employee_id):
