@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-
+"""
+This script fetches user data and todo list for a given employee ID
+from the JSONPlaceholder API and exports the data in JSON format.
+"""
 import json
 import requests
 import sys
