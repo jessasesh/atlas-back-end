@@ -22,8 +22,7 @@ def get_todo_list(employee_id):
     """
     Retrieves the TODO list of a specific employee from the REST API.
     """
-    url = (f"https://jsonplaceholder.typicode.com/"
-           f"users/{employee_id}/todos")
+    url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
     response = requests.get(url)
     response.raise_for_status()  # Raise an exception for any HTTP error
     return response.json()
