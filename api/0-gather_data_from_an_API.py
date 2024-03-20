@@ -49,4 +49,3 @@ if __name__ == "__main__":
         print_todo_list_progress(employee_name, completed_tasks, total_tasks)
     else:
         print("No tasks found for the given employee.")
-    
