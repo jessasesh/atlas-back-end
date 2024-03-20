@@ -8,14 +8,22 @@ import requests
 import sys
 
 
+def get_employee_name(employee_id):
+    """
+    Retrieves the name of the employee from the REST API.
+    """
+    url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+    response = requests.get(url)
+    response.raise_for_status()  # Raise an exception for any HTTP error
+    return response.json().get('name', 'Unknown')
+
+
 def get_todo_list(employee_id):
     """
     Retrieves the TODO list of a specific employee from the REST API.
     """
-    url = (
-        "https://jsonplaceholder.typicode.com/"
-        f"users/{employee_id}/todos"
-    )
+    url = (f"https://jsonplaceholder.typicode.com/"
+           f"users/{employee_id}/todos")
     response = requests.get(url)
     response.raise_for_status()  # Raise an exception for any HTTP error
     return response.json()
@@ -40,12 +48,10 @@ if __name__ == "__main__":
         sys.exit(1)
 
     employee_id = int(sys.argv[1])
+    employee_name = get_employee_name(employee_id)
     todo_list = get_todo_list(employee_id)
 
-    if todo_list:
-        employee_name = todo_list[0].get('name', 'Unknown')
-        completed_tasks = [task for task in todo_list if task['completed']]
-        total_tasks = len(todo_list)
-        print_todo_list_progress(employee_name, completed_tasks, total_tasks)
-    else:
-        print("No tasks found for the given employee.")
+    completed_tasks = [task for task in todo_list if task['completed']]
+    total_tasks = len(todo_list)
+
+    print_todo_list_progress(employee_name, completed_tasks, total_tasks)
