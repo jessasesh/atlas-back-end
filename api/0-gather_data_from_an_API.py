@@ -43,7 +43,7 @@ if __name__ == "__main__":
     todo_list = get_todo_list(employee_id)
 
     completed_tasks = [task for task in todo_list if task['completed']]
-    employee_name = todo_list[0]['name']
+    employee_name = todo_list[0]['name'] if todo_list else "Unknown"
     total_tasks = len(todo_list)
 
     print_todo_list_progress(employee_name, completed_tasks, total_tasks)
