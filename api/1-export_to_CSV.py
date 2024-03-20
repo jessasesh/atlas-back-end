@@ -2,9 +2,9 @@
 """
 This script to exports data in the CSV format.
 """
+import csv
 import requests
 import sys
-import csv
 
 
 def get_username(user_id):
