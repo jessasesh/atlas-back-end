@@ -8,34 +8,34 @@ import requests
 import sys
 
 
-def get_employee_tasks(employeeId):
-    """ Returns all tasks associated with an employee """
-    url = "https://jsonplaceholder.typicode.com/"
-    url += "users/{}/todos".format(employeeId)
-    response = requests.get(url)
-    return response.json()
+def employee_todo(employeeId):
+    """returns all tasks assigned to employee"""
+    link = "https://jsonplaceholder.typicode.com/"
+    link += "users/{}/todos".format(employeeId)
+    display = requests.get(link)
+    return display.json()
 
 
-def get_employee_name(employeeId):
-    """ Returns employee name from specific ID """
-    url = "https://jsonplaceholder.typicode.com/"
-    url += "users/{}".format(employeeId)
-    response = requests.get(url)
-    return response.json().get("name")
+def employee_name(employeeId):
+    """returns name of specific employee"""
+    link = "https://jsonplaceholder.typicode.com/"
+    link += "users/{}".format(employeeId)
+    display = requests.get(link)
+    return display.json().get("name")
 
 
-def get_completed_tasks(tasks):
-    """ Returns all completed tasks """
-    completed_tasks = []
+def tasks_done(tasks):
+    """returns number of tasks completed by employee"""
+    tasks_completed = []
 
     for task in tasks:
         if task.get("completed"):
-            completed_tasks.append(task)
-    return completed_tasks
+            tasks_completed.append(task)
+    return tasks_completed
 
 
-def print_employee_tasks(employeeName, completedTasks, totalTasks):
-    """ Prints all tasks by employee ID """
+def print_tasks(employeeName, completedTasks, totalTasks):
+    """print all tasks assigned to employee"""
     print("Employee {} is done with tasks({}/{}):"
           .format(employeeName, len(completedTasks), totalTasks))
     for task in completedTasks:
@@ -44,7 +44,7 @@ def print_employee_tasks(employeeName, completedTasks, totalTasks):
 
 if __name__ == "__main__":
     employeeId = sys.argv[1]
-    tasks = get_employee_tasks(employeeId)
-    employeeName = get_employee_name(employeeId)
-    completedTasks = get_completed_tasks(tasks)
-    print_employee_tasks(employeeName, completedTasks, len(tasks))
+    tasks = employee_todo(employeeId)
+    employeeName = employee_name(employeeId)
+    completedTasks = tasks_done(tasks)
+    print_tasks(employeeName, completedTasks, len(tasks))
